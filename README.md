@@ -54,3 +54,34 @@ Zookeeper Leader Election algorithm in 3 steps:
   3. If the Znode the current node created is the smallest number it knows that it is now the leader. Others would know that they are not the leader and would then 
   wait for instructions from the elected leader
   
+
+### Zookeeper config
+
+useful commands:
+   ./zkServer.sh start -> start zookeeper server
+   ./zkCli.sh -> client environment
+   ls / -> check the list of nodes
+   ls /parent -> check the nodes under parent directory
+   creat /parent "blahblah" -> create parent node with content "blahblah"
+   get /parent -> get information about the parent node
+   help -> show help menu
+  
+### Zookeeper Threading Model
+
+Application's start code in the main method is executed on the main thread
+When Zookeeper object is created, two additional threads are created -> Event thread & IO thread
+
+  IO Thread -> we don't interact with IO thread directly but IO Thread handles the following
+    Handles all the network communications with Zookeeper servers
+    Handles Zookeeper requests and responses
+    Responds to pings
+    Session Management
+    Session Timeouts
+    
+  Event Thread 
+    Manages Zookeeper events
+      Connection (KeeperState.SyncConnected)
+      Disconnection (KeeperState.Disconnected)
+    Custom Znode watchers and triggers that we subscribe to
+    Events are executed on Event Thread in order
+    
