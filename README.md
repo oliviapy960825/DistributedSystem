@@ -85,3 +85,25 @@ When Zookeeper object is created, two additional threads are created -> Event th
     Custom Znode watchers and triggers that we subscribe to
     Events are executed on Event Thread in order
     
+
+### Watchers and Triggers
+
+We can register a watcher when we call the methods
+  getChildren(.., watcher) -> Get notified when the list of a znode's children changes
+  exists(zNodePath, watcher) -> Get notified if a zNode gets deleted or created
+  getData(zNodePath, watcher) -> Get notified if a zNode's data get modified
+The watcher allows us to get a notification when a change happens
+
+public ZooKeeper(String connectString, int sessionTimeout, Watcher watcher) Also takes a watcher. The difference is that, Watchers registered with getChildren(), exists(), getData() are one-time triggers. If we want to get future notifications, we need to register the watcher again
+
+
+### The Herd Effect
+
+  1. A large number of nodes waiting for an event
+  2. When the event happens, all nodes get notified and they all wake up
+  3. Only one node can "succeed"
+  4. Indicates bad design, can negatively impact the performance and can completely freeze the cluster
+  
+### Fault Tolerance Requirements
+
+In order for our system to be fault tolerant, the Leader Election algorithm needs to be able to recover from failures and re-elect a new leader automatically
