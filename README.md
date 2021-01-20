@@ -107,3 +107,30 @@ public ZooKeeper(String connectString, int sessionTimeout, Watcher watcher) Also
 ### Fault Tolerance Requirements
 
 In order for our system to be fault tolerant, the Leader Election algorithm needs to be able to recover from failures and re-elect a new leader automatically
+
+
+### Horizontal Scalability
+
+We can add nodes dynamically on demand as we grow our business
+
+### Service Registry & Service Discovery
+
+#### Static configuration 
+
+put all the addresses in a list somewhere
+limitation : 
+  1. when a node dies or changes address, all other nodes won't know and will still be trying to reach the node by its old address
+  2. need to regenerate the file if we need to add new nodes
+
+#### Dynamic Configuration
+
+Some companies still manage their clusters in this way, with some similarities to static configuration
+Every time a new node is added, one central configuration is updated, and an automated configuration management tool like Chef or Puppet can pick up the configuration and distribute it among the nodes in the cluster
+
+
+#### Leader / Worker Architecture
+
+  Workers will register themselves with the cluster
+  Only the leader will register for notifications
+  Leader will know about the state of the cluster at all times and distribute the work accordingly
+  If a leader dies, the new leader will remove itself from the service registry and continue distributing the work
