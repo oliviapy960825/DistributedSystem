@@ -189,59 +189,66 @@ TCP/IP Network Model -> each layer is communicating with the layer beneath it an
 
 #### HTTP Request Get Method
 
-1. Safe - Only retrieval action with no side effects
-    Like a getter method in JAVA
-2. Idempotent - Performing the underlying operation N times is equivalent to performing the operation only once
+    1. Safe - Only retrieval action with no side effects
+        Like a getter method in JAVA
+    2. Idempotent - Performing the underlying operation N times is equivalent to performing the operation only once
 
 #### HTTP Request Post Method
 
-1. Contains a message body (payload)
-2. The operation may have side effects and we expect the server to perform a complex operation and give us a result
-3. Because the post request can carry a message body, it is very useful in communication between nodes
+    1. Contains a message body (payload)
+    2. The operation may have side effects and we expect the server to perform a complex operation and give us a result
+    3. Because the post request can carry a message body, it is very useful in communication between nodes
 
 #### HTTP Headers - Message Body Information
 
-Content-length -> indicates the size of the message body
-Content-type -> Indicates the type of the message
-Content-encoding -> Indicates the compression algorithm to be used
+    Content-length -> indicates the size of the message body
+    Content-type -> Indicates the type of the message
+    Content-encoding -> Indicates the compression algorithm to be used
 
 #### HTTP Headers - Custom Headers
 
 We can pass custom headers, for example
   
-  X-Debug -> Pass / log more debug information while handling the request
-  
-  X-Experiment -> Turn on experimental features on A/B testing
-  
-  X-Test -> Operate on test data instead of Customers' data
-  
-  Timestamp headers for instrumentation
+    X-Debug -> Pass / log more debug information while handling the request
+
+    X-Experiment -> Turn on experimental features on A/B testing
+
+    X-Test -> Operate on test data instead of Customers' data
+
+    Timestamp headers for instrumentation
   
 #### HTTP Headers - Protocol Differences
 
-In HTTP/1.1 - Plain text key value pairs that can be easily inspected by tools like Wireshark
+    In HTTP/1.1 - Plain text key value pairs that can be easily inspected by tools like Wireshark
 
-In HTTP/2 - The headers are compressed
+    In HTTP/2 - The headers are compressed
 
-  Saves on payload size
-  Harder to inspect / debug
-  
+    Saves on payload size
+    Harder to inspect / debug
+
 #### HTTP Message Body
 
-Can contain anything we want
+    Can contain anything we want
 
-The server and client have to agree on how to parse the data
+    The server and client have to agree on how to parse the data
 
-Can contain complex data objects
+    Can contain complex data objects
 
 #### HTTP Status Code
 
-  1xx Informational Response
+    1xx Informational Response
+    2xx Success
+    3xx Redirection
+    4xx Client Errors
+    5xx Server Errors
 
-  2xx Success
+#### cURL - Command Line Http Client
 
-  3xx Redirection
-
-  4xx Client Errors
-
-  5xx Server Errors
+  Using cURL so we can test our HTTP Server
+  Has many features and arguments
+  
+    1. --request HTTP_METHOD
+    2. --header HEADER_LINE
+    3. --verbose (-v)
+    4. --data SOME_DATA
+    5. HTTP server address
