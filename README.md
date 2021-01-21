@@ -210,27 +210,38 @@ Content-encoding -> Indicates the compression algorithm to be used
 We can pass custom headers, for example
   
   X-Debug -> Pass / log more debug information while handling the request
+  
   X-Experiment -> Turn on experimental features on A/B testing
+  
   X-Test -> Operate on test data instead of Customers' data
+  
   Timestamp headers for instrumentation
   
 #### HTTP Headers - Protocol Differences
 
 In HTTP/1.1 - Plain text key value pairs that can be easily inspected by tools like Wireshark
+
 In HTTP/2 - The headers are compressed
+
   Saves on payload size
   Harder to inspect / debug
   
 #### HTTP Message Body
 
 Can contain anything we want
+
 The server and client have to agree on how to parse the data
+
 Can contain complex data objects
 
 #### HTTP Status Code
 
-1xx Informational Response
-2xx Success
-3xx Redirection
-4xx Client Errors
-5xx Server Errors
+  1xx Informational Response
+
+  2xx Success
+
+  3xx Redirection
+
+  4xx Client Errors
+
+  5xx Server Errors
