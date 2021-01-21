@@ -134,3 +134,54 @@ Every time a new node is added, one central configuration is updated, and an aut
   Only the leader will register for notifications
   Leader will know about the state of the cluster at all times and distribute the work accordingly
   If a leader dies, the new leader will remove itself from the service registry and continue distributing the work
+
+
+### Network communication
+
+TCP/IP Network Model -> each layer is communicating with the layer beneath it and the same layer of the other machine/station using the relevant protocols 
+
+#### Layer 1 - Data Link
+  Physical delivery of data over a single link
+  In charge of 
+    Encapsulation of the data
+    Flow control
+    Error detection
+    Error correction
+    etc..
+    
+#### Layer 2 - Internet
+  Protocal for Internet layer -> Internet Protocol (IP)
+  Need the IP address of the communication parties
+
+#### Layer 3 - Transport
+  Use port
+  
+  Two primary protocols:
+  
+    User Datagram Protocol (UDP) -> is preferred when the speed and simplicity is more important than reliability. E.g., sending debugging information to a 
+    distributed logging service, or real-time streaming services 
+    
+      Connectionless
+      Best effor -> unreliable
+      Messages can be lost, duplicated and reordered
+      Based on a unit called Datagram which is limited in size
+      Allows broadcasting, decoupling between the sender and receivers
+      
+    Transmission Control Protocol (TCP)
+    
+      Reliable -> guarantees data delivery as sent, without any losses
+      Connection between 2 points
+        Needs to be created before data is sent
+        Shut down in the end
+      Works as streaming interface
+      More popular protocal in distributed systems because of the reliability
+      
+#### Layer 4 - Application
+  
+  Protocols:
+  
+    FTP(File Transfer Protocol) : transfering files through the web
+    SMTP(Simple Mail Transfer Protocol) : sending and receiving emails
+    DNS(Domain Name System) : Translating host names into IP addresses
+    HTTP(Hypertext Transfer Protocal) :Transmitting Hypermedia documents, video, sound, image
+    
