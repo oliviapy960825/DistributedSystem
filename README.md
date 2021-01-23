@@ -252,3 +252,16 @@ We can pass custom headers, for example
     3. --verbose (-v)
     4. --data SOME_DATA
     5. HTTP server address
+
+### Key features for performance we care about for HTTP Server
+
+  1. Support for sending HTTP requests asynchronously 
+  2. Maintaining a connection pool to all the downstream HTTP servers
+  
+### Connection Pooling
+
+If HTTP/2 is enabled on both HTTP Server and Client
+  Connection pooling is enabled by default
+If one of the peers does not support HTTP/2
+  We need to make sure it is enabled by default
+  Or enable it explicitly 
